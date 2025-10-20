@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuthFlow - Secure JWT Authentication API</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>AuthFlow</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#docs">API Docs</a></li>
+                <li><a href="https://github.com/aphiwe-debug/auth-flow" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>AuthFlow</h1>
+            <p class="hero-subtitle">Production-Ready JWT Authentication API</p>
+            <p class="hero-description">
+                Secure, scalable FastAPI authentication system with JWT tokens, 
+                PostgreSQL database, and Docker containerization.
+            </p>
+            <div class="hero-buttons">
+                <a href="#demo" class="btn btn-primary">Try Demo</a>
+                <a href="https://github.com/aphiwe-debug/auth-flow" class="btn btn-secondary" target="_blank">
+                    <i class="fab fa-github"></i> View Code
+                </a>
+            </div>
+            <div class="tech-stack">
+                <span class="tech-badge">FastAPI</span>
+                <span class="tech-badge">JWT</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">Docker</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure Authentication</h3>
+                    <p>JWT tokens with bcrypt password hashing and refresh token rotation</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-database"></i>
+                    <h3>PostgreSQL Database</h3>
+                    <p>Robust data persistence with SQLAlchemy ORM and proper migrations</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-docker"></i>
+                    <h3>Docker Ready</h3>
+                    <p>Containerized deployment with Docker Compose for easy scaling</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-api"></i>
+                    <h3>RESTful API</h3>
+                    <p>Clean API design with automatic OpenAPI documentation</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-check"></i>
+                    <h3>Protected Routes</h3>
+                    <p>Dependency injection for secure endpoint access control</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Production Ready</h3>
+                    <p>Error handling, validation, and security best practices</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <h2>Interactive Demo</h2>
+            <div class="demo-container">
+                <div class="demo-panel">
+                    <h3>Test Authentication</h3>
+                    <div class="demo-tabs">
+                        <button class="tab-btn active" data-tab="register">Register</button>
+                        <button class="tab-btn" data-tab="login">Login</button>
+                        <button class="tab-btn" data-tab="profile">Profile</button>
+                    </div>
+                    
+                    <div id="register" class="tab-content active">
+                        <form class="demo-form">
+                            <input type="email" placeholder="Email" id="reg-email" required>
+                            <input type="password" placeholder="Password" id="reg-password" required>
+                            <input type="text" placeholder="Full Name" id="reg-name" required>
+                            <button type="button" onclick="registerUser()">Register</button>
+                        </form>
+                    </div>
+                    
+                    <div id="login" class="tab-content">
+                        <form class="demo-form">
+                            <input type="email" placeholder="Email" id="login-email" required>
+                            <input type="password" placeholder="Password" id="login-password" required>
+                            <button type="button" onclick="loginUser()">Login</button>
+                        </form>
+                    </div>
+                    
+                    <div id="profile" class="tab-content">
+                        <div class="profile-info">
+                            <p>Login first to view your profile</p>
+                            <button type="button" onclick="getProfile()" disabled id="profile-btn">Get Profile</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="response-panel">
+                    <h3>API Response</h3>
+                    <pre id="response-output">Click a demo button to see API responses...</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Documentation -->
+    <section id="docs" class="docs">
+        <div class="container">
+            <h2>API Endpoints</h2>
+            <div class="endpoints-grid">
+                <div class="endpoint-card">
+                    <div class="method post">POST</div>
+                    <div class="endpoint-info">
+                        <h4>/auth/register</h4>
+                        <p>Register a new user account</p>
+                    </div>
+                </div>
+                <div class="endpoint-card">
+                    <div class="method post">POST</div>
+                    <div class="endpoint-info">
+                        <h4>/auth/login</h4>
+                        <p>Login and receive JWT tokens</p>
+                    </div>
+                </div>
+                <div class="endpoint-card">
+                    <div class="method post">POST</div>
+                    <div class="endpoint-info">
+                        <h4>/auth/refresh</h4>
+                        <p>Refresh access token</p>
+                    </div>
+                </div>
+                <div class="endpoint-card">
+                    <div class="method post">POST</div>
+                    <div class="endpoint-info">
+                        <h4>/auth/logout</h4>
+                        <p>Logout and revoke tokens</p>
+                    </div>
+                </div>
+                <div class="endpoint-card">
+                    <div class="method get">GET</div>
+                    <div class="endpoint-info">
+                        <h4>/users/me</h4>
+                        <p>Get current user profile (protected)</p>
+                    </div>
+                </div>
+                <div class="endpoint-card">
+                    <div class="method get">GET</div>
+                    <div class="endpoint-info">
+                        <h4>/docs</h4>
+                        <p>Interactive API documentation</p>
+                    </div>
+                </div>
+            </div>
+            <div class="docs-links">
+                <a href="http://localhost:8000/docs" class="btn btn-primary" target="_blank">
+                    <i class="fas fa-book"></i> Interactive Docs
+                </a>
+                <a href="https://github.com/aphiwe-debug/auth-flow" class="btn btn-secondary" target="_blank">
+                    <i class="fab fa-github"></i> Source Code
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AuthFlow</h4>
+                    <p>Secure JWT Authentication API built with FastAPI</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="https://github.com/aphiwe-debug/auth-flow">GitHub Repository</a></li>
+                        <li><a href="http://localhost:8000/docs">API Documentation</a></li>
+                        <li><a href="#demo">Live Demo</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Tech Stack</h4>
+                    <ul>
+                        <li>FastAPI & Python</li>
+                        <li>PostgreSQL Database</li>
+                        <li>JWT Authentication</li>
+                        <li>Docker Containers</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AuthFlow. Built by Aphiwe Debug.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
